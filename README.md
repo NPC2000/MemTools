@@ -1,9 +1,10 @@
 # MemTools
 Windows DMA、Dump 、Direct 内存工具
 
-# 如何Dump内存
-#### 使用下面的MemTools仓库代码进行Dump
+
+# Dump的内存如何使用
+### 使用下面CEDumpPlugin插件配合CE即可进行分析
 
 ## 关于
-* [CheatEngine-DMA(CE DMA内存插件)](https://github.com/Metick/CheatEngine-DMA)
-* [MemTools(内存读写、dump工具)](https://github.com/bbgsm/MemTools)
+* [DMALibrary(DMA工具代码)](https://github.com/Metick/DMALibrary)
+* [CEDumpPlugin(CE Dump内存分析插件)](https://github.com/bbgsm/CEDumpPlugin)

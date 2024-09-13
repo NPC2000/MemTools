@@ -48,7 +48,7 @@ void search(){
 }
 
 // dump 内存结构和数据示例
-// dump 的内存也可以使用 https://,CE Dump 插件，用CE分析dump内存
+// dump 的内存也可以使用 https://github.com/bbgsm/CEDumpPlugin Dump 插件，配合CE即可分析dump的内存
 void dump(){
     // dump 内存到文件
     memoryTools->dumpAllMem("D:\\memDump");
