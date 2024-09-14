@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <winsock2.h>
@@ -35,7 +36,7 @@ void MemoryToolsBase::setSearchAll() {
     for (const auto &module : moduleRegions) {
         addSearchRang(module.baseAddress, module.baseAddress + module.baseSize);
     }
-     for (const auto &memory : memoryRegions) {
+    for (const auto &memory : memoryRegions) {
         addSearchRang(memory.baseAddress, memory.baseAddress + memory.baseSize);
     }
 }
@@ -696,7 +697,7 @@ int MemoryToolsBase::rangeMemoryOffset(std::string from_value, std::string to_va
 
 
 void MemoryToolsBase::memoryWrite(std::string value, ulong offset, Type type) {
-    mbyte *buff;
+    mbyte *buff = nullptr;
     int len = 0;
     if (type == MEM_DWORD) {
         int val = atoi(value.c_str());
@@ -723,11 +724,16 @@ void MemoryToolsBase::memoryWrite(std::string value, ulong offset, Type type) {
         buff = new mbyte[BSize];
         memcpy(buff, &val, BSize);
         len = BSize;
+    } else {
+        printf("Not support type: %d\n", type);
+        return;
     }
     // 迭代器
     std::list<RADDR>::iterator pmapsit;
     for (pmapsit = resultList->begin(); pmapsit != resultList->end(); ++pmapsit) {
-        memWrite(&value, len, pmapsit->addr, offset);
+        if(memWrite(buff, len, pmapsit->addr, offset) != len){
+            printf("Write error, Addr: %llX\n", pmapsit->addr);
+        }
     }
 }
 
@@ -776,6 +782,11 @@ ulong MemoryToolsBase::dumpMem(std::string dumpModule, std::string filePath) {
 }
 
 ulong MemoryToolsBase::dumpAllMem(const std::string &dirPath) {
+    std::filesystem::path path(dirPath);
+    if (!exists(path)) {
+        printf("No such directory: %s\n", path.string().c_str());
+        return 0;
+    }
     ulong total = 0;
     std::string dictTxtPath = dirPath + "/dict.txt";
     FILE *dictTxt = fopen(dictTxtPath.c_str(), "wb");

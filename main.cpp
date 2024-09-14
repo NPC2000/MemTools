@@ -51,11 +51,11 @@ void search(){
 // dump 的内存也可以使用 https://github.com/bbgsm/CEDumpPlugin Dump 插件，配合CE即可分析dump的内存
 void dump(){
     // dump 内存到文件
-    memoryTools->dumpAllMem("D:\\memDump");
+    memoryTools->dumpAllMem("D:\\memDump\\out");
 
     // 使用DumpMemoryTools工具读取dump的内存
     DumpMemoryTools dumpMemoryTools;
-    if (!dumpMemoryTools.init("D:\\memDump\\dict.txt")) {
+    if (!dumpMemoryTools.init("D:\\memDump\\out\\dict.txt")) {
         printf("Failed to initialize MemoryTools\n");
     }
     // 打印模块信息
@@ -67,10 +67,10 @@ void dump(){
 int main() {
 
     // // 直接读取本机应用内存
-    // memoryTools = new DirectMemoryTools();
-    // if (!memoryTools->init("test.exe")) {
-    //    printf("Failed to initialize MemoryTools\n");
-    // }
+    memoryTools = new DirectMemoryTools();
+    if (!memoryTools->init("LANShare.exe")) {
+       printf("Failed to initialize MemoryTools\n");
+    }
 
     // // Dma读取其他主机内存
     // memoryTools = new DmaMemoryTools();
@@ -79,11 +79,11 @@ int main() {
     // }
 
     // 读取memoryTools->dumpAllMem()下来的内存
-    memoryTools = new DumpMemoryTools();
-    if (!memoryTools->init("D:\\memDump\\dict.txt")) {
-       printf("Failed to initialize MemoryTools\n");
-       return 1;
-    }
+    // memoryTools = new DumpMemoryTools();
+    // if (!memoryTools->init("D:\\memDump\\dict.txt")) {
+    //    printf("Failed to initialize MemoryTools\n");
+    //    return 1;
+    // }
     search();
     dump();
     return 0;
