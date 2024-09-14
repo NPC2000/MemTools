@@ -80,9 +80,11 @@ int main() {
 
     // 读取memoryTools->dumpAllMem()下来的内存
     memoryTools = new DumpMemoryTools();
-    if (!memoryTools->init("D:\\memDump")) {
+    if (!memoryTools->init("D:\\memDump\\dict.txt")) {
        printf("Failed to initialize MemoryTools\n");
+       return 1;
     }
-
+    search();
+    dump();
     return 0;
 }

@@ -30,7 +30,14 @@ add_executable(test
         main.cpp
         DmaMemoryTools.cpp
         DumpMemoryTools.cpp
-        DumpMemoryTools.cpp
+        DirectMemoryTools.cpp
+        MemoryToolsBase.cpp
+)
+
+# dump
+add_executable(dumpMem
+        dump.cpp
+        DirectMemoryTools.cpp
         MemoryToolsBase.cpp
 )
 
