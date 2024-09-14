@@ -124,7 +124,7 @@ ulong readAvailableMemory(Addr addr, void *buff, ulong size) {
             total += minSize;
             ulong surplus = size - minSize;
             if (surplus > 0) {
-                total += readAvailableMemory(addr + surplus, buff, surplus);
+                total += readAvailableMemory(addr + minSize, buff, surplus);
             }
             return total;
         }
@@ -161,8 +161,8 @@ ulong writeAvailableMemory(Addr addr, void *buff, ulong size) {
             fwrite(buff, minSize, 1, file);
             total += minSize;
             ulong surplus = size - minSize;
-            if (minSize > 0) {
-                total += writeAvailableMemory(addr + surplus, buff, surplus);
+            if (surplus > 0) {
+                total += writeAvailableMemory(addr + minSize, buff, surplus);
             }
             return total;
         }
