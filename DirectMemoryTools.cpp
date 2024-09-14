@@ -29,6 +29,7 @@ bool DirectMemoryTools::init(std::string bm) {
     if (pid > 0) {
         hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
         processID = pid;
+        processName = bm;
         initModuleRegions();
         initMemoryRegions();
         baseModule = getModule(bm);
