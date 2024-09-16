@@ -1922,7 +1922,7 @@ BOOL VMMDLL_MemSearch(
 #define VMMYARA_RULE_MATCH_TAG_MAX          8
 #define VMMYARA_RULE_MATCH_META_MAX         16
 #define VMMYARA_RULE_MATCH_STRING_MAX       8
-#define VMMYARA_RULE_MATCH_OFFSET_MAX       16
+#define VMMYARA_RULE_MATCH_OFF_MAX       16
 
 /*
 * Struct with match information upon a match in VmmYara_RulesScanMemory().
@@ -1942,7 +1942,7 @@ typedef struct tdVMMYARA_RULE_MATCH {
     struct {
         LPSTR szString;
         DWORD cMatch;
-        SIZE_T cbMatchOffset[VMMYARA_RULE_MATCH_OFFSET_MAX];
+        SIZE_T cbMatchOffset[VMMYARA_RULE_MATCH_OFF_MAX];
     } Strings[VMMYARA_RULE_MATCH_STRING_MAX];
 } VMMYARA_RULE_MATCH, *PVMMYARA_RULE_MATCH;
 
